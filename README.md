@@ -1,8 +1,8 @@
 # Sage Summit Capital — Marketing Site
 
-Production-grade marketing site for **Sage Summit Capital**, an AI-native investment and operating platform building, acquiring, and transforming middle-market businesses.
+Marketing site for **Sage Summit Capital**, the holding and operating platform behind **Vantage Rock Financial** — currently the only operating company referenced on the site.
 
-The site is intentionally informational. The **only** CTA is the HubSpot form embedded in the contact section — for potential investors, partners, and acquisition targets.
+There is one offer on the site: **Book a 30-minute call.** Every CTA (nav, hero, Vantage Rock section, footer) points to the booking form at `#book`, which posts to a Resend-backed API route — the same setup as vantagerockfinancial.com.
 
 ---
 
@@ -36,9 +36,9 @@ All three are loaded via Google Fonts (preconnected) for fast first paint.
 - **Next.js 14** (App Router, static-generated)
 - **React 18** + **TypeScript**
 - **Tailwind CSS** (config in place; design system is mostly in `app/globals.css` for fine-grained control)
-- **HubSpot Forms** (embedded contact)
+- **Resend** (booking-form email delivery via `app/api/lead/route.ts`)
 
-Designed to deploy directly on **Vercel**. No backend required.
+Designed to deploy directly on **Vercel**.
 
 ---
 
@@ -64,14 +64,17 @@ app/
 components/
   Nav.tsx           # Sticky nav with scroll state + mobile menu
   Wordmark.tsx      # Mountain icon + Playfair lockup (inverted variant for dark surfaces)
-  Hero.tsx          # Headline + portfolio command center mock with 3D tilt + marquee
-  Sections.tsx      # Shift / WhatWeDo / Ecosystem / OperatingModel / TargetCompanies / Vision / CTA
+  Hero.tsx          # Headline + "platform view" card (Sage Summit → Vantage Rock) with 3D tilt + marquee
+  Sections.tsx      # Shift / WhatWeDo / Ecosystem (Vantage Rock) / OperatingModel / TargetCompanies / Vision / CTA (book)
   Reveal.tsx        # Scroll-triggered fade-in (respects prefers-reduced-motion)
-  HubSpotForm.tsx   # The only CTA on the entire site
-  Footer.tsx        # Dark institutional footer with ecosystem links
+  BookingForm.tsx   # The booking form — posts to /api/lead
+  Footer.tsx        # Dark institutional footer
+
+app/api/lead/route.ts   # Resend email delivery, honeypot, per-IP rate limit
+lib/site.ts             # Site constants: CTA label/anchor, contact email, Vantage Rock details
 
 public/assets/
-  sage-summit-logo.png
+  sage-summit-logo.png, vantage-rock-logo.png, vr-icon.png, …
 ```
 
 ---
@@ -83,11 +86,11 @@ public/assets/
 | 1  | Hero                   | `#top`       |
 | 2  | The Shift              | `#shift`     |
 | 3  | What We Do (3 pillars) | `#approach`  |
-| 4  | The Ecosystem          | `#ecosystem` |
+| 4  | Vantage Rock           | `#vantage-rock` |
 | 5  | Operating Model        | `#model`     |
 | 6  | Target Companies       | `#partners`  |
 | 7  | Long-term Vision       | `#vision`    |
-| 8  | CTA (HubSpot)          | `#contact`   |
+| 8  | Book a 30-minute call  | `#book`      |
 
 ---
 
@@ -95,10 +98,10 @@ public/assets/
 
 Subtle, executive-level — no neon, no cyberpunk, no startup chaos:
 
-- Hero dashboard tilts on cursor (desktop only, disabled with reduced-motion).
+- Hero platform-view card tilts on cursor (desktop only, disabled with reduced-motion).
 - Background glows breathe slowly.
 - Reveal animations on scroll (IntersectionObserver, staggered).
-- KPI live-pulse dot.
+- Live-pulse status dot.
 - Floating accent cards drift.
 - Marquee of brand-language scrolls horizontally.
 
@@ -106,23 +109,23 @@ All motion respects `prefers-reduced-motion`.
 
 ---
 
-## HubSpot form
+## Booking form (Resend)
 
-The contact form is embedded once, in the CTA section.
+The form in the `#book` section posts to `app/api/lead/route.ts`, which emails each request via [Resend](https://resend.com). Set these in `.env.local` (copy `env.example` to `.env.local`) and in Vercel → Settings → Environment Variables:
 
-- **Portal:** `244871017`
-- **Form ID:** `245a30d4-7055-4d7a-9df2-a7d84173d3e5`
-- **Region:** `na2`
+```
+RESEND_API_KEY=re_xxxxxxxx
+LEAD_TO_EMAIL=you@sagesummitcapital.com
+# once the domain is verified in Resend:
+LEAD_FROM_EMAIL=Sage Summit Capital <leads@sagesummitcapital.com>
+```
 
-To swap the form later, edit `components/HubSpotForm.tsx`.
+Until the env vars are set, submissions are logged to the server console so nothing is lost in development. The route includes a honeypot field and a per-IP rate limit (5 per 10 minutes).
+
+To change the fields or the "I am…" options, edit `components/BookingForm.tsx` and the `LeadPayload` type in the route.
 
 ---
 
-## Ecosystem links
+## Vantage Rock
 
-The footer + ecosystem section link to the sibling sites:
-
-- Vantage Rock → `https://vantagerock.com`
-- AI Does My Work → `https://aidoesmywork.com`
-
-These can be updated in `components/Sections.tsx` (Ecosystem) and `components/Footer.tsx`.
+All copy, links and CTAs reference **Vantage Rock Financial** only. Its URL, tagline and pillars live in `lib/site.ts` (`VANTAGE_ROCK`), so a change there updates the hero card, the Vantage Rock section and the footer together.

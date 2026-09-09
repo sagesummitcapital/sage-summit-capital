@@ -1,7 +1,8 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
 import { Reveal } from "./Reveal";
-import { HubSpotForm } from "./HubSpotForm";
+import { BookingForm } from "./BookingForm";
+import { CTA_ANCHOR, CTA_LABEL, CONTACT_EMAIL, VANTAGE_ROCK } from "@/lib/site";
 
 /* ===================================================================
    SECTION 2 — THE SHIFT
@@ -22,10 +23,10 @@ export function Shift() {
             companies.
           </h2>
           <p className="section__lede">
-            Traditional businesses are constrained by labor-heavy operations,
-            fragmented systems, and outdated infrastructure. Sage Summit Capital
-            exists to modernize how businesses operate — through AI-native systems,
-            intelligent workflows, and operational transformation.
+            Most middle-market businesses still run on labor-heavy operations,
+            fragmented systems, and a finance function that reports what happened
+            weeks after it happened. Sage Summit Capital exists to change how those
+            businesses operate — starting with finance, through Vantage Rock.
           </p>
         </Reveal>
 
@@ -121,7 +122,7 @@ const PILLARS: Array<{ num: string; title: string; desc: string; icon: ReactNode
   {
     num: "01",
     title: "Acquire",
-    desc: "We identify and acquire businesses with strong operational potential and modernize them through AI-native infrastructure — turning durable cash-flow assets into intelligent enterprises.",
+    desc: "We look for durable, founder-led operators with strong fundamentals and modernize them with AI-native infrastructure — turning cash-flow businesses into intelligent enterprises. This is the thesis we are building toward.",
     icon: (
       <svg viewBox="0 0 32 32" fill="none">
         <path d="M5 24 L5 10 L16 4 L27 10 L27 24 Z" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
@@ -133,7 +134,7 @@ const PILLARS: Array<{ num: string; title: string; desc: string; icon: ReactNode
   {
     num: "02",
     title: "Build",
-    desc: "We incubate and launch intelligent businesses designed for the next generation of operational scalability — built from the ground up on shared AI-native infrastructure.",
+    desc: "We build operating companies from the ground up. Vantage Rock Financial — a fractional CFO and AI-enabled finance firm — is the first, and the one we are actively building today.",
     icon: (
       <svg viewBox="0 0 32 32" fill="none">
         <rect x="6" y="6" width="9" height="9" stroke="currentColor" strokeWidth="1.4" />
@@ -147,7 +148,7 @@ const PILLARS: Array<{ num: string; title: string; desc: string; icon: ReactNode
   {
     num: "03",
     title: "Transform",
-    desc: "We deploy AI-native systems that improve operational leverage, visibility, and long-term enterprise value — across portfolio companies, partners, and acquisition targets.",
+    desc: "Through Vantage Rock, we deploy AI-native finance systems inside client companies — faster closes, real cash visibility, and reporting leadership can run the business on.",
     icon: (
       <svg viewBox="0 0 32 32" fill="none">
         <path d="M5 22 L11 14 L17 18 L27 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
@@ -175,8 +176,8 @@ export function WhatWeDo() {
           </h2>
           <p className="section__lede">
             Sage Summit Capital operates across the lifecycle of AI-native business
-            building — acquiring, incubating, and transforming companies through a
-            shared layer of operational infrastructure.
+            building. Today the emphasis is on building and transforming through
+            Vantage Rock; acquisition is where the platform is headed.
           </p>
         </Reveal>
 
@@ -196,27 +197,41 @@ export function WhatWeDo() {
 }
 
 /* ===================================================================
-   SECTION 4 — ECOSYSTEM
+   SECTION 4 — VANTAGE ROCK (the active operating company)
    =================================================================== */
+
+const VR_OFFERS: Array<{ title: string; desc: string }> = [
+  {
+    title: "Fractional CFO",
+    desc: "Senior finance leadership — capital planning, unit economics, pricing, lender and investor relationships, board reporting — without the full-time hire.",
+  },
+  {
+    title: "FP&A",
+    desc: "Operating models, budgets, rolling forecasts, cash flow planning, and KPI reporting built to be read rather than filed.",
+  },
+  {
+    title: "AI implementation",
+    desc: "Automation built into the finance function: faster closes, forecasts that update continuously, dashboards wired to the source.",
+  },
+];
 
 export function Ecosystem() {
   return (
-    <section className="section" id="ecosystem">
+    <section className="section" id="vantage-rock">
       <div className="container-x">
         <Reveal className="section__head section__head--center">
           <div className="eyebrow">
             <span className="eyebrow__dot" />
-            <span>03 — The ecosystem</span>
+            <span>03 — The operating company</span>
           </div>
           <h2 className="section__title">
-            An integrated{" "}
-            <span className="gradient-accent gradient-accent-line">AI-native</span>{" "}
-            business ecosystem.
+            Meet{" "}
+            <span className="gradient-accent gradient-accent-line">Vantage Rock</span>.
           </h2>
           <p className="section__lede">
-            Sage Summit Capital sits at the center of a portfolio of AI-native
-            operating companies — each building infrastructure that compounds
-            across the others.
+            Vantage Rock Financial is the first Sage Summit company and the one we
+            are actively building. It is a fractional CFO firm that uses AI so
+            close, cash, and reporting keep up with the business.
           </p>
         </Reveal>
 
@@ -227,18 +242,18 @@ export function Ecosystem() {
               <div>
                 <div className="eyebrow eyebrow--inv">
                   <span className="eyebrow__dot" />
-                  <span>Parent platform</span>
+                  <span>How it fits</span>
                 </div>
                 <h3 className="eco__parent-title">
-                  Sage Summit Capital — the operating system layer.
+                  Sage Summit is the platform. Vantage Rock is where the work happens.
                 </h3>
                 <p className="eco__parent-lede">
-                  We allocate capital, define shared standards, and operate the
-                  infrastructure layer that every company in the ecosystem builds on.
-                  Each subsidiary inherits the same operating discipline, the same
-                  modern stack, and the same AI-native posture.
+                  Sage Summit Capital sets the operating discipline, the modern
+                  stack, and the AI-native posture. Vantage Rock applies it inside
+                  founder-led and sponsor-backed companies every month — which is
+                  also how we learn what the next company should be.
                 </p>
-                <span className="eco__parent-tag">A unified operating platform</span>
+                <span className="eco__parent-tag">A platform, not a portfolio</span>
               </div>
 
               <div className="eco__map" aria-hidden="true">
@@ -253,15 +268,11 @@ export function Ecosystem() {
                   Sage Summit Capital
                 </div>
                 <div className="eco__map-trunk" />
-                <div className="eco__map-branches">
-                  <div className="eco__map-row">
+                <div className="eco__map-branches eco__map-branches--single">
+                  <div className="eco__map-row eco__map-row--single">
                     <div className="eco__map-child">
                       <span className="eco__map-child-name">Vantage Rock Financial</span>
-                      <span className="eco__map-child-sub">Financial infra</span>
-                    </div>
-                    <div className="eco__map-child">
-                      <span className="eco__map-child-name">AI Does My Work</span>
-                      <span className="eco__map-child-sub">Operational AI</span>
+                      <span className="eco__map-child-sub">Fractional CFO · FP&amp;A · AI</span>
                     </div>
                   </div>
                 </div>
@@ -269,90 +280,75 @@ export function Ecosystem() {
             </div>
           </div>
 
-          {/* Children */}
-          <div className="eco__children">
-            <article className="eco__child">
-              <div className="eco__child-tag">
-                <span className="eco__child-tag-dot" />
-                <span>Subsidiary · Financial infrastructure</span>
+          {/* Featured company */}
+          <article className="eco__child eco__child--feature">
+            <div className="eco__feature-grid">
+              <div>
+                <div className="eco__child-tag">
+                  <span className="eco__child-tag-dot" />
+                  <span>Operating company · Active</span>
+                </div>
+                <div className="eco__child-logo">
+                  <Image
+                    src="/assets/vantage-rock-logo.png"
+                    width={1183}
+                    height={522}
+                    alt="Vantage Rock Financial"
+                    className="eco__child-logo-img"
+                  />
+                </div>
+                <p className="eco__child-desc">
+                  {VANTAGE_ROCK.tagline} Built for founder-led and sponsor-backed
+                  companies from $1M in revenue — strongest in healthcare, retail,
+                  professional services, technology and SaaS, and multi-entity groups.
+                </p>
+                <div className="eco__child-actions">
+                  <a className="btn btn--primary" href={CTA_ANCHOR}>
+                    <span>{CTA_LABEL}</span>
+                    <svg viewBox="0 0 16 16" aria-hidden="true">
+                      <path
+                        d="M3 8h10M9 4l4 4-4 4"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </a>
+                  <a
+                    className="eco__child-link"
+                    href={VANTAGE_ROCK.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {VANTAGE_ROCK.display}
+                    <svg viewBox="0 0 16 16" fill="none">
+                      <path
+                        d="M3 8h10M9 4l4 4-4 4"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </a>
+                </div>
               </div>
-              <div className="eco__child-logo">
-                <Image
-                  src="/assets/vantage-rock-logo.png"
-                  width={1183}
-                  height={522}
-                  alt="Vantage Rock Financial"
-                  className="eco__child-logo-img"
-                />
-              </div>
-              <p className="eco__child-desc">
-                Modernizing CFO and financial team infrastructure through AI-native
-                financial operations — autonomous reporting, intelligent forecasting,
-                and modern close acceleration for the middle market.
-              </p>
-              <div className="eco__child-foot">
-                <span className="eco__child-foot-line">A Sage Summit ecosystem company</span>
-                <a
-                  className="eco__child-link"
-                  href="https://vantagerockfinancial.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  vantagerockfinancial.com
-                  <svg viewBox="0 0 16 16" fill="none">
-                    <path
-                      d="M3 8h10M9 4l4 4-4 4"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </a>
-              </div>
-            </article>
 
-            <article className="eco__child">
-              <div className="eco__child-tag">
-                <span className="eco__child-tag-dot" style={{ background: "#7A8F7C" }} />
-                <span>Subsidiary · Operational AI</span>
-              </div>
-              <div className="eco__child-logo">
-                <Image
-                  src="/assets/ai-does-my-work-logo.png"
-                  width={1498}
-                  height={462}
-                  alt="AI Does My Work"
-                  className="eco__child-logo-img"
-                />
-              </div>
-              <p className="eco__child-desc">
-                AI-native portfolio transformation through intelligent operational
-                systems — automating the labor-heavy workflows that sit between
-                strategy and execution across portfolio companies.
-              </p>
-              <div className="eco__child-foot">
-                <span className="eco__child-foot-line">A Sage Summit ecosystem company</span>
-                <a
-                  className="eco__child-link"
-                  href="https://aidoesmywork.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  aidoesmywork.com
-                  <svg viewBox="0 0 16 16" fill="none">
-                    <path
-                      d="M3 8h10M9 4l4 4-4 4"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </a>
-              </div>
-            </article>
-          </div>
+              <ul className="eco__offers">
+                {VR_OFFERS.map((o, i) => (
+                  <li key={o.title} className="eco__offer">
+                    <span className="eco__offer-num">0{i + 1}</span>
+                    <div>
+                      <h4 className="eco__offer-title">{o.title}</h4>
+                      <p className="eco__offer-desc">{o.desc}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </article>
         </Reveal>
       </div>
     </section>
@@ -458,9 +454,9 @@ export function OperatingModel() {
             <span className="gradient-accent gradient-accent-line">operating model</span>.
           </h2>
           <p className="section__lede">
-            We believe every business function will become AI-native. Sage Summit
-            Capital develops and deploys modern operational infrastructure designed
-            to increase scalability, efficiency, and long-term enterprise value.
+            We believe every business function will become AI-native, and finance
+            goes first. This is the model Vantage Rock runs inside client companies
+            and the one every future Sage Summit company will inherit.
           </p>
         </Reveal>
 
@@ -599,9 +595,10 @@ export function TargetCompanies() {
             <span className="gradient-accent gradient-accent-line">modernization</span>.
           </h2>
           <p className="section__lede">
-            We focus on founder-led middle-market operators, portfolio companies of
-            private equity sponsors, and family offices looking for a long-term
-            partner in operational transformation.
+            Founder-led middle-market operators, portfolio companies of private
+            equity sponsors, and family offices looking for a long-term partner in
+            operational transformation — whether that starts with a Vantage Rock
+            engagement or a bigger conversation.
           </p>
         </Reveal>
 
@@ -616,8 +613,8 @@ export function TargetCompanies() {
 
           <Reveal className="target target--ideal" delay={4}>
             <div className="target__ideal-tag">Ideal revenue band</div>
-            <div className="target__ideal-v">$5M–$100M</div>
-            <div className="target__ideal-l">Founder-led · middle-market</div>
+            <div className="target__ideal-v">$1M–$100M</div>
+            <div className="target__ideal-l">Founder-led · sponsor-backed</div>
           </Reveal>
         </div>
       </div>
@@ -646,9 +643,9 @@ export function Vision() {
               </h2>
               <p className="vision__copy">
                 Our long-term vision is to become the benchmark platform for
-                AI-native company building, operational modernization, and
-                intelligent enterprise infrastructure. We don&apos;t chase trends.
-                We build what lasts.
+                AI-native company building — starting with finance, through
+                Vantage Rock, and expanding one operating company at a time.
+                We don&apos;t chase trends. We build what lasts.
               </p>
               <div className="vision__signature">
                 Sage Summit Capital — a platform, not a portfolio.
@@ -701,19 +698,6 @@ export function Vision() {
                   />
                 </g>
 
-                {/* AI Does My Work icon — sitting on the middle orbit, left side */}
-                <g>
-                  <circle cx="60" cy="200" r="22" fill="#F7F8F6" stroke="rgba(122, 143, 124, 0.45)" strokeWidth="1" />
-                  <image
-                    href="/assets/aidmw-icon.png"
-                    x="44"
-                    y="184"
-                    width="32"
-                    height="32"
-                    preserveAspectRatio="xMidYMid meet"
-                  />
-                </g>
-
                 {/* Secondary orbital nodes */}
                 <circle cx="200" cy="20"  r="4" fill="#7A8F7C" />
                 <circle cx="290" cy="345" r="3" fill="rgba(255,255,255,0.5)" />
@@ -733,12 +717,12 @@ export function Vision() {
 }
 
 /* ===================================================================
-   SECTION 8 — CTA
+   SECTION 8 — BOOK A CALL
    =================================================================== */
 
 export function CTA() {
   return (
-    <section className="section section--cta" id="contact">
+    <section className="section section--cta" id="book">
       <div className="container-x">
         <Reveal className="cta">
           <div className="cta__bg" aria-hidden="true" />
@@ -746,23 +730,24 @@ export function CTA() {
             <div>
               <div className="eyebrow">
                 <span className="eyebrow__dot" />
-                <span>Start the conversation</span>
+                <span>07 — Next step</span>
               </div>
               <h2 className="cta__title">
-                Build the future of{" "}
-                <span className="gradient-accent gradient-accent-line">operational intelligence</span>.
+                Book a 30-minute{" "}
+                <span className="gradient-accent gradient-accent-line">call</span>.
               </h2>
               <p className="cta__lede">
-                We work with investors, operators, and founders building or running
-                middle-market businesses. Tell us a little about your situation —
-                we&apos;ll respond personally.
+                A fit-check, not a sales call. You talk directly with the founder
+                about your situation — whether that&apos;s a Vantage Rock engagement,
+                a partnership, or an acquisition conversation — and we both leave
+                knowing whether there&apos;s work here worth doing.
               </p>
 
               <ul className="cta__points">
                 {[
-                  "Investors & sponsors exploring AI-native value creation",
-                  "Founders considering acquisition or strategic partnership",
-                  "Portfolio operators ready for operational modernization",
+                  "You talk to the founder, not a salesperson",
+                  "Thirty minutes, on your calendar, within a business day",
+                  "Confidential — nothing shared, nothing sold",
                 ].map((t, i) => (
                   <li key={i}>
                     <span className="ic ic--check">
@@ -781,14 +766,17 @@ export function CTA() {
                   </li>
                 ))}
               </ul>
+
+              <div className="cta__direct">
+                <div className="cta__direct-label">Or reach out directly</div>
+                <a href={`mailto:${CONTACT_EMAIL}`} className="cta__direct-link">
+                  {CONTACT_EMAIL}
+                </a>
+              </div>
             </div>
 
             <div className="cta__form">
-              <div className="cta__form-head">
-                <div className="cta__form-title">Start the conversation</div>
-                <div className="cta__form-sub">Confidential · investor-grade</div>
-              </div>
-              <HubSpotForm />
+              <BookingForm />
             </div>
           </div>
         </Reveal>

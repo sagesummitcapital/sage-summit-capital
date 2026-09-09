@@ -1,23 +1,22 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { SITE_DESCRIPTION } from "@/lib/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://sagesummitcapital.com"),
-  title:
-    "Sage Summit Capital — Building the next generation of AI-native businesses",
-  description:
-    "Sage Summit Capital is an AI-native investment and operating platform focused on acquiring, building, and transforming middle-market companies through intelligent systems and operational modernization.",
+  title: "Sage Summit Capital — The platform behind AI-native finance",
+  description: SITE_DESCRIPTION,
+  alternates: { canonical: "/" },
   openGraph: {
-    title: "Sage Summit Capital — Capital for the AI-native era",
-    description:
-      "An AI-native investment and operating platform building, acquiring, and transforming middle-market companies.",
+    title: "Sage Summit Capital — The platform behind Vantage Rock Financial",
+    description: SITE_DESCRIPTION,
     type: "website",
     images: ["/assets/sage-summit-logo.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Sage Summit Capital",
-    description: "Capital for the AI-native era.",
+    description: "The holding and operating platform behind Vantage Rock Financial.",
   },
 };
 

@@ -2,6 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { Wordmark } from "./Wordmark";
+import {
+  CONTACT_EMAIL,
+  CTA_ANCHOR,
+  CTA_LABEL,
+  FOUNDER_LINKEDIN,
+  VANTAGE_ROCK,
+} from "@/lib/site";
 
 export function Footer() {
   const [year, setYear] = useState(2026);
@@ -13,11 +20,11 @@ export function Footer() {
         <div className="footer__brand">
           <Wordmark inverted />
           <p className="footer__statement">
-            An AI-native investment and operating platform building the next
-            generation of middle-market businesses.
+            The holding and operating platform behind Vantage Rock Financial —
+            building AI-native finance for the middle market.
           </p>
           <div className="footer__ecosystem-tag">
-            The operating system for AI-native businesses
+            A platform, not a portfolio
           </div>
         </div>
 
@@ -33,16 +40,12 @@ export function Footer() {
             </ul>
           </div>
           <div className="footer__col">
-            <h4>Ecosystem</h4>
+            <h4>Operating company</h4>
             <ul>
+              <li><a href="#vantage-rock">About Vantage Rock</a></li>
               <li>
-                <a href="https://vantagerockfinancial.com" target="_blank" rel="noopener noreferrer">
-                  Vantage Rock Financial ↗
-                </a>
-              </li>
-              <li>
-                <a href="https://aidoesmywork.com" target="_blank" rel="noopener noreferrer">
-                  AI Does My Work ↗
+                <a href={VANTAGE_ROCK.url} target="_blank" rel="noopener noreferrer">
+                  {VANTAGE_ROCK.name} ↗
                 </a>
               </li>
             </ul>
@@ -50,8 +53,13 @@ export function Footer() {
           <div className="footer__col">
             <h4>Contact</h4>
             <ul>
-              <li><a href="#contact">Partner with us</a></li>
-              <li><a href="mailto:partners@sagesummitcapital.com">partners@sagesummitcapital.com</a></li>
+              <li><a href={CTA_ANCHOR}>{CTA_LABEL}</a></li>
+              <li><a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a></li>
+              <li>
+                <a href={FOUNDER_LINKEDIN} target="_blank" rel="noopener noreferrer">
+                  LinkedIn ↗
+                </a>
+              </li>
             </ul>
           </div>
         </div>
@@ -64,9 +72,7 @@ export function Footer() {
             We don&apos;t chase trends — we build what lasts.
           </span>
           <span className="footer__bottom-links">
-            <a href="#">Privacy</a>
-            <span>·</span>
-            <a href="#">Terms</a>
+            <a href={`mailto:${CONTACT_EMAIL}`}>Contact</a>
           </span>
         </div>
       </div>

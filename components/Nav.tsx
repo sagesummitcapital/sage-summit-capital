@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Wordmark } from "./Wordmark";
+import { CTA_ANCHOR, CTA_LABEL } from "@/lib/site";
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -28,23 +29,23 @@ export function Nav() {
           aria-label="Primary"
         >
           <a href="#shift" onClick={closeMenu}>The shift</a>
-          <a href="#approach" onClick={closeMenu}>Approach</a>
-          <a href="#ecosystem" onClick={closeMenu}>Ecosystem</a>
+          <a href="#approach" onClick={closeMenu}>What we do</a>
+          <a href="#vantage-rock" onClick={closeMenu}>Vantage Rock</a>
           <a href="#model" onClick={closeMenu}>Operating model</a>
           <a href="#partners" onClick={closeMenu}>Partners</a>
           <a href="#vision" onClick={closeMenu}>Vision</a>
           <a
             className="nav__links-cta"
-            href="#contact"
+            href={CTA_ANCHOR}
             onClick={closeMenu}
           >
-            Partner with us →
+            {CTA_LABEL} →
           </a>
         </nav>
 
         <div className="nav__cta">
-          <a className="btn btn--primary" href="#contact">
-            <span>Partner with us</span>
+          <a className="btn btn--primary" href={CTA_ANCHOR}>
+            <span>{CTA_LABEL}</span>
             <svg viewBox="0 0 16 16" aria-hidden="true">
               <path
                 d="M3 8h10M9 4l4 4-4 4"

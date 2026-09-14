@@ -1,15 +1,10 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
+import type { Lead } from "@/lib/email";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
-type LeadPayload = {
-  name: string;
-  email: string;
-  title: string;
-  company: string;
-  interest: string;
-  message?: string;
+type LeadPayload = Lead & {
   /** Honeypot — if filled, the submitter is a bot. */
   website?: string;
 };
@@ -28,7 +23,8 @@ function validate(data: Partial<LeadPayload>): string | null {
     }
   }
   const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRe.test(String(data.email))) return "Invalid email";
+  const email = String(data.email);
+  if (!emailRe.test(email) || email.length > 254) return "Invalid email";
   return null;
 }
 
@@ -52,14 +48,13 @@ function rateLimited(ip: string): boolean {
   return recent.length > MAX_PER_WINDOW;
 }
 
-const esc = (s: string) => s.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-
 export async function POST(req: Request) {
   try {
     const ip =
       req.headers.get("x-forwarded-for")?.split(",")[0].trim() ||
       req.headers.get("x-real-ip") ||
       "unknown";
+    const userAgent = req.headers.get("user-agent")?.slice(0, 200) || "";
 
     if (rateLimited(ip)) {
       return NextResponse.json(
@@ -68,7 +63,7 @@ export async function POST(req: Request) {
       );
     }
 
-    const body = (await req.json()) as Partial<LeadPayload>;
+    const body = (await req.json().catch(() => ({}))) as Partial<LeadPayload>;
 
     // Honeypot: silently accept so bots don't learn they were caught.
     if (body.website && String(body.website).trim() !== "") {
@@ -80,57 +75,49 @@ export async function POST(req: Request) {
       return NextResponse.json({ error }, { status: 400 });
     }
 
-    const lead: LeadPayload = {
-      name: String(body.name).trim(),
+    const lead: Lead = {
+      name: String(body.name).trim().slice(0, 120),
       email: String(body.email).trim().toLowerCase(),
-      title: String(body.title).trim(),
-      company: String(body.company).trim(),
-      interest: String(body.interest).trim(),
-      message: body.message ? String(body.message).trim() : "",
+      title: String(body.title).trim().slice(0, 120),
+      company: String(body.company).trim().slice(0, 160),
+      interest: String(body.interest).trim().slice(0, 160),
+      message: body.message ? String(body.message).trim().slice(0, 2000) : "",
     };
 
-    // ── Email delivery via Resend ──────────────────────────────
-    // Same setup as vantagerockfinancial.com:
-    //   RESEND_API_KEY=re_xxxxxxxx
-    //   LEAD_TO_EMAIL=you@sagesummitcapital.com
-    //   LEAD_FROM_EMAIL=Sage Summit Capital <leads@sagesummitcapital.com>  (once domain is verified)
-    const apiKey = process.env.RESEND_API_KEY;
-    const toEmail = process.env.LEAD_TO_EMAIL;
+    // Always log so a lead is recoverable from platform logs even if mail fails.
+    console.log(
+      `[lead] ${lead.email} · ${lead.company} · ${lead.interest} · ip=${ip}`
+    );
 
-    if (apiKey && toEmail) {
-      const resend = new Resend(apiKey);
-      const from =
-        process.env.LEAD_FROM_EMAIL ||
-        "Sage Summit Capital <onboarding@resend.dev>";
+    const { isEmailConfigured, sendLeadNotification, sendLeadConfirmation } =
+      await import("@/lib/email");
 
-      const { error: sendError } = await resend.emails.send({
-        from,
-        to: toEmail,
-        replyTo: lead.email,
-        subject: `New 30-minute call request — ${lead.company} (${lead.interest})`,
-        html: `
-          <h2 style="margin:0 0 12px">New 30-minute call request</h2>
-          <table style="border-collapse:collapse;font-family:sans-serif;font-size:14px">
-            <tr><td style="padding:4px 12px 4px 0;color:#666">Name</td><td style="padding:4px 0"><b>${esc(lead.name)}</b></td></tr>
-            <tr><td style="padding:4px 12px 4px 0;color:#666">Title</td><td style="padding:4px 0">${esc(lead.title)}</td></tr>
-            <tr><td style="padding:4px 12px 4px 0;color:#666">Company</td><td style="padding:4px 0"><b>${esc(lead.company)}</b></td></tr>
-            <tr><td style="padding:4px 12px 4px 0;color:#666">Email</td><td style="padding:4px 0"><a href="mailto:${esc(lead.email)}">${esc(lead.email)}</a></td></tr>
-            <tr><td style="padding:4px 12px 4px 0;color:#666">I am</td><td style="padding:4px 0">${esc(lead.interest)}</td></tr>
-          </table>
-          ${lead.message ? `<p style="font-family:sans-serif;font-size:14px"><b>What they want to talk about:</b><br>${esc(lead.message)}</p>` : ""}
-          <p style="font-family:sans-serif;font-size:12px;color:#999">Reply directly to this email to respond to ${esc(lead.name.split(" ")[0])}.</p>
-        `,
-      });
-
-      if (sendError) {
-        console.error("Resend error:", sendError);
-        // Don't fail the user's submission over a mail hiccup — log it.
-      }
-    } else {
-      console.log(
-        "[lead] (email not configured — set RESEND_API_KEY + LEAD_TO_EMAIL)",
-        lead
+    if (!isEmailConfigured()) {
+      console.error(
+        "[lead] RESEND_API_KEY or LEAD_TO_EMAIL missing — request only logged."
       );
+      return NextResponse.json(
+        { error: "Submissions are temporarily unavailable." },
+        { status: 503 }
+      );
+    }
+
+    // The notification is the one that matters — nothing else stores the lead.
+    try {
+      await sendLeadNotification(lead, { ip, userAgent });
+    } catch (e) {
+      console.error("[lead] notification failed:", e);
+      return NextResponse.json(
+        { error: "Couldn't submit right now. Please try again." },
+        { status: 502 }
+      );
+    }
+
+    // Acknowledgement to the submitter is best-effort — never fails the request.
+    try {
+      await sendLeadConfirmation(lead);
+    } catch (e) {
+      console.error("[lead] confirmation failed:", e);
     }
 
     return NextResponse.json({ ok: true });

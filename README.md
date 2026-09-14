@@ -36,7 +36,7 @@ All three are loaded via Google Fonts (preconnected) for fast first paint.
 - **Next.js 14** (App Router, static-generated)
 - **React 18** + **TypeScript**
 - **Tailwind CSS** (config in place; design system is mostly in `app/globals.css` for fine-grained control)
-- **Resend** (booking-form email delivery via `app/api/lead/route.ts`)
+- **Resend** (booking-form email delivery via `app/api/lead/route.ts` + `lib/email.ts`)
 
 Designed to deploy directly on **Vercel**.
 
@@ -70,7 +70,8 @@ components/
   BookingForm.tsx   # The booking form — posts to /api/lead
   Footer.tsx        # Dark institutional footer
 
-app/api/lead/route.ts   # Resend email delivery, honeypot, per-IP rate limit
+app/api/lead/route.ts   # Validation, honeypot, per-IP rate limit, Resend dispatch
+lib/email.ts            # Resend templates: lead notification + submitter confirmation
 lib/site.ts             # Site constants: CTA label/anchor, contact email, Vantage Rock details
 
 public/assets/
@@ -111,21 +112,39 @@ All motion respects `prefers-reduced-motion`.
 
 ## Booking form (Resend)
 
-The form in the `#book` section posts to `app/api/lead/route.ts`, which emails each request via [Resend](https://resend.com). Set these in `.env.local` (copy `env.example` to `.env.local`) and in Vercel → Settings → Environment Variables:
+The form in the `#book` section posts to `app/api/lead/route.ts`. Every valid
+submission sends **two emails** through [Resend](https://resend.com):
 
-```
-RESEND_API_KEY=re_xxxxxxxx
-LEAD_TO_EMAIL=you@sagesummitcapital.com
-# once the domain is verified in Resend:
-LEAD_FROM_EMAIL=Sage Summit Capital <leads@sagesummitcapital.com>
-```
+1. **Lead notification → you** at `LEAD_TO_EMAIL`, with every field plus
+   timestamp and IP. `Reply-To` is the submitter, so replying reaches them.
+2. **Confirmation → the submitter**, acknowledging the request and promising a
+   reply within one business day. `Reply-To` is `CONTACT_EMAIL` from
+   `lib/site.ts`.
 
-Until the env vars are set, submissions are logged to the server console so nothing is lost in development. The route includes a honeypot field and a per-IP rate limit (5 per 10 minutes).
+Both templates live in `lib/email.ts`.
 
-To change the fields or the "I am…" options, edit `components/BookingForm.tsx` and the `LeadPayload` type in the route.
+### Environment variables
 
----
+Copy `env.example` to `.env.local` for development, and add the same in
+**Vercel → Settings → Environment Variables**:
 
-## Vantage Rock
+| Variable | Example | Notes |
+| --- | --- | --- |
+| `RESEND_API_KEY` | `re_xxxxxxxx` | From Resend → API Keys. |
+| `LEAD_TO_EMAIL` | `you@sagesummitcapital.com` | Where lead alerts land. Comma-separate for several. |
+| `LEAD_FROM_EMAIL` | `Sage Summit Capital <leads@sagesummitcapital.com>` | The "From" line on both emails. Must be on a domain verified in Resend. |
 
-All copy, links and CTAs reference **Vantage Rock Financial** only. Its URL, tagline and pillars live in `lib/site.ts` (`VANTAGE_ROCK`), so a change there updates the hero card, the Vantage Rock section and the footer together.
+Redeploy after adding them.
+
+### Behaviour
+
+- Every submission is logged (`[lead] email · company · interest · ip=…`) so a
+  lead is recoverable from **Vercel → Logs** even if mail fails.
+- If the lead notification fails, the visitor gets an error and can retry —
+  nothing else stores the lead, so it is never silently dropped.
+- If the confirmation fails, the submission still succeeds; the failure is logged.
+- Without the env vars the route returns 503 and only logs the request.
+- Honeypot field plus a per-IP rate limit (5 per 10 minutes).
+
+To change the fields or the "I am…" options, edit `components/BookingForm.tsx`,
+the `Lead` type in `lib/email.ts`, and `validate()` in the route.

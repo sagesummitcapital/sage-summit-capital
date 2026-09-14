@@ -82,8 +82,8 @@ export function BookingForm() {
         </div>
         <h3 className="form__success-title">Request received.</h3>
         <p className="form__success-copy">
-          We&apos;ll reply within one business day with a calendar link for a
-          30-minute call.
+          A confirmation is on its way to your inbox. We&apos;ll reply within one
+          business day with a calendar link for a 30-minute call.
         </p>
         <button
           type="button"

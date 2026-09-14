@@ -2,7 +2,20 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import { Reveal } from "./Reveal";
 import { BookingForm } from "./BookingForm";
-import { CTA_ANCHOR, CTA_LABEL, CONTACT_EMAIL, VANTAGE_ROCK } from "@/lib/site";
+import { CTA_ANCHOR, CTA_LABEL, CONTACT_EMAIL, MOONBAG, VANTAGE_ROCK } from "@/lib/site";
+
+const ArrowGlyph = () => (
+  <svg viewBox="0 0 16 16" aria-hidden="true">
+    <path
+      d="M3 8h10M9 4l4 4-4 4"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
 
 /* ===================================================================
    SECTION 2 — THE SHIFT
@@ -26,7 +39,8 @@ export function Shift() {
             Most middle-market businesses still run on labor-heavy operations,
             fragmented systems, and a finance function that reports what happened
             weeks after it happened. Sage Summit Capital exists to change how those
-            businesses operate — starting with finance, through Vantage Rock.
+            decisions get made — inside the business through Vantage Rock, and in
+            the markets through Moonbag.
           </p>
         </Reveal>
 
@@ -134,7 +148,7 @@ const PILLARS: Array<{ num: string; title: string; desc: string; icon: ReactNode
   {
     num: "02",
     title: "Build",
-    desc: "We build operating companies from the ground up. Vantage Rock Financial — a fractional CFO and AI-enabled finance firm — is the first, and the one we are actively building today.",
+    desc: "We build operating companies from the ground up. Vantage Rock Financial — a fractional CFO and AI-enabled finance firm — came first. Moonbag.ai, an AI market intelligence and execution layer, is the second.",
     icon: (
       <svg viewBox="0 0 32 32" fill="none">
         <rect x="6" y="6" width="9" height="9" stroke="currentColor" strokeWidth="1.4" />
@@ -148,7 +162,7 @@ const PILLARS: Array<{ num: string; title: string; desc: string; icon: ReactNode
   {
     num: "03",
     title: "Transform",
-    desc: "Through Vantage Rock, we deploy AI-native finance systems inside client companies — faster closes, real cash visibility, and reporting leadership can run the business on.",
+    desc: "Through Vantage Rock, we deploy AI-native finance systems inside client companies — faster closes, real cash visibility, and reporting leadership can run the business on. Moonbag applies the same discipline to market data.",
     icon: (
       <svg viewBox="0 0 32 32" fill="none">
         <path d="M5 22 L11 14 L17 18 L27 6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
@@ -176,8 +190,8 @@ export function WhatWeDo() {
           </h2>
           <p className="section__lede">
             Sage Summit Capital operates across the lifecycle of AI-native business
-            building. Today the emphasis is on building and transforming through
-            Vantage Rock; acquisition is where the platform is headed.
+            building. Today the emphasis is on building and transforming — two
+            operating companies live; acquisition is where the platform is headed.
           </p>
         </Reveal>
 
@@ -197,7 +211,7 @@ export function WhatWeDo() {
 }
 
 /* ===================================================================
-   SECTION 4 — VANTAGE ROCK (the active operating company)
+   SECTION 4 — OPERATING COMPANIES (Vantage Rock · Moonbag.ai)
    =================================================================== */
 
 const VR_OFFERS: Array<{ title: string; desc: string }> = [
@@ -215,23 +229,38 @@ const VR_OFFERS: Array<{ title: string; desc: string }> = [
   },
 ];
 
+const MB_OFFERS: Array<{ title: string; desc: string }> = [
+  {
+    title: "Market scanner",
+    desc: "Continuous coverage across crypto, equities, gold, and ETFs — so opportunities surface without the manual sweep through a hundred charts.",
+  },
+  {
+    title: "Opportunity ratings",
+    desc: "Every asset scored on trend, momentum, setup quality, volatility, and risk/reward, with plain-English reasoning behind the score.",
+  },
+  {
+    title: "Execution plans",
+    desc: "Entries, invalidation levels, and profit targets in one place — plus alerts when a setup improves, triggers, weakens, or breaks.",
+  },
+];
+
 export function Ecosystem() {
   return (
-    <section className="section" id="vantage-rock">
+    <section className="section" id="companies">
       <div className="container-x">
         <Reveal className="section__head section__head--center">
           <div className="eyebrow">
             <span className="eyebrow__dot" />
-            <span>03 — The operating company</span>
+            <span>03 — The operating companies</span>
           </div>
           <h2 className="section__title">
-            Meet{" "}
-            <span className="gradient-accent gradient-accent-line">Vantage Rock</span>.
+            Two companies.{" "}
+            <span className="gradient-accent gradient-accent-line">One operating model</span>.
           </h2>
           <p className="section__lede">
-            Vantage Rock Financial is the first Sage Summit company and the one we
-            are actively building. It is a fractional CFO firm that uses AI so
-            close, cash, and reporting keep up with the business.
+            Vantage Rock Financial and Moonbag.ai are the two Sage Summit companies
+            building today. Different markets, same thesis: put an intelligence layer
+            where the decisions are made, and let the systems do the mechanical work.
           </p>
         </Reveal>
 
@@ -245,13 +274,13 @@ export function Ecosystem() {
                   <span>How it fits</span>
                 </div>
                 <h3 className="eco__parent-title">
-                  Sage Summit is the platform. Vantage Rock is where the work happens.
+                  Sage Summit is the platform. The companies are where the work happens.
                 </h3>
                 <p className="eco__parent-lede">
                   Sage Summit Capital sets the operating discipline, the modern
                   stack, and the AI-native posture. Vantage Rock applies it inside
-                  founder-led and sponsor-backed companies every month — which is
-                  also how we learn what the next company should be.
+                  founder-led and sponsor-backed companies; Moonbag applies it to
+                  live markets. Both are how we learn what the next company should be.
                 </p>
                 <span className="eco__parent-tag">A platform, not a portfolio</span>
               </div>
@@ -268,11 +297,15 @@ export function Ecosystem() {
                   Sage Summit Capital
                 </div>
                 <div className="eco__map-trunk" />
-                <div className="eco__map-branches eco__map-branches--single">
-                  <div className="eco__map-row eco__map-row--single">
+                <div className="eco__map-branches">
+                  <div className="eco__map-row">
                     <div className="eco__map-child">
                       <span className="eco__map-child-name">Vantage Rock Financial</span>
                       <span className="eco__map-child-sub">Fractional CFO · FP&amp;A · AI</span>
+                    </div>
+                    <div className="eco__map-child">
+                      <span className="eco__map-child-name">Moonbag.ai</span>
+                      <span className="eco__map-child-sub">Market intel · Execution</span>
                     </div>
                   </div>
                 </div>
@@ -280,13 +313,13 @@ export function Ecosystem() {
             </div>
           </div>
 
-          {/* Featured company */}
-          <article className="eco__child eco__child--feature">
+          {/* Operating company 01 — Vantage Rock */}
+          <article className="eco__child eco__child--feature" id="vantage-rock">
             <div className="eco__feature-grid">
               <div>
                 <div className="eco__child-tag">
                   <span className="eco__child-tag-dot" />
-                  <span>Operating company · Active</span>
+                  <span>Operating company 01 · Live</span>
                 </div>
                 <div className="eco__child-logo">
                   <Image
@@ -338,6 +371,68 @@ export function Ecosystem() {
 
               <ul className="eco__offers">
                 {VR_OFFERS.map((o, i) => (
+                  <li key={o.title} className="eco__offer">
+                    <span className="eco__offer-num">0{i + 1}</span>
+                    <div>
+                      <h4 className="eco__offer-title">{o.title}</h4>
+                      <p className="eco__offer-desc">{o.desc}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </article>
+
+          {/* Operating company 02 — Moonbag.ai */}
+          <article
+            className="eco__child eco__child--feature eco__child--alt"
+            id="moonbag"
+          >
+            <div className="eco__feature-grid">
+              <div>
+                <div className="eco__child-tag">
+                  <span className="eco__child-tag-dot eco__child-tag-dot--alt" />
+                  <span>Operating company 02 · Early access</span>
+                </div>
+                <div className="eco__child-logo">
+                  <Image
+                    src="/assets/moonbag-logo.png"
+                    width={1964}
+                    height={560}
+                    alt="Moonbag.ai"
+                    className="eco__child-logo-img"
+                  />
+                </div>
+                <p className="eco__child-desc">
+                  {MOONBAG.tagline} Moonbag scans crypto, equities, gold, and ETFs
+                  continuously, rates what it finds, and hands the trader a
+                  structured plan instead of another chart. The system does the
+                  scanning; the human still makes the call.
+                </p>
+                <div className="eco__child-actions">
+                  <a
+                    className="btn btn--primary"
+                    href={MOONBAG.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span>Get early access</span>
+                    <ArrowGlyph />
+                  </a>
+                  <a
+                    className="eco__child-link"
+                    href={MOONBAG.social}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {MOONBAG.socialHandle}
+                    <ArrowGlyph />
+                  </a>
+                </div>
+              </div>
+
+              <ul className="eco__offers">
+                {MB_OFFERS.map((o, i) => (
                   <li key={o.title} className="eco__offer">
                     <span className="eco__offer-num">0{i + 1}</span>
                     <div>
@@ -454,9 +549,10 @@ export function OperatingModel() {
             <span className="gradient-accent gradient-accent-line">operating model</span>.
           </h2>
           <p className="section__lede">
-            We believe every business function will become AI-native, and finance
-            goes first. This is the model Vantage Rock runs inside client companies
-            and the one every future Sage Summit company will inherit.
+            We believe every decision-heavy function will become AI-native, and
+            finance goes first. This is the model Vantage Rock runs inside client
+            companies, the one Moonbag runs against live markets, and the one every
+            future Sage Summit company will inherit.
           </p>
         </Reveal>
 
@@ -643,8 +739,8 @@ export function Vision() {
               </h2>
               <p className="vision__copy">
                 Our long-term vision is to become the benchmark platform for
-                AI-native company building — starting with finance, through
-                Vantage Rock, and expanding one operating company at a time.
+                AI-native company building — finance through Vantage Rock, markets
+                through Moonbag, and onward one operating company at a time.
                 We don&apos;t chase trends. We build what lasts.
               </p>
               <div className="vision__signature">
@@ -694,6 +790,19 @@ export function Vision() {
                     y="184"
                     width="32"
                     height="32"
+                    preserveAspectRatio="xMidYMid meet"
+                  />
+                </g>
+
+                {/* Moonbag icon — mirrored on the middle orbit, left side */}
+                <g>
+                  <circle cx="60" cy="200" r="22" fill="#FFFFFF" stroke="rgba(122, 143, 124, 0.45)" strokeWidth="1" />
+                  <image
+                    href="/assets/moonbag-icon.png"
+                    x="45"
+                    y="185"
+                    width="30"
+                    height="30"
                     preserveAspectRatio="xMidYMid meet"
                   />
                 </g>

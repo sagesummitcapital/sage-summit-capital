@@ -4,11 +4,12 @@ import { SITE_DESCRIPTION } from "@/lib/site";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://sagesummitcapital.com"),
-  title: "Sage Summit Capital — The platform behind AI-native finance",
+  title: "Sage Summit Capital — The platform behind AI-native finance and markets",
   description: SITE_DESCRIPTION,
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Sage Summit Capital — The platform behind Vantage Rock Financial",
+    title:
+      "Sage Summit Capital — The platform behind Vantage Rock Financial and Moonbag.ai",
     description: SITE_DESCRIPTION,
     type: "website",
     images: ["/assets/sage-summit-logo.png"],
@@ -16,7 +17,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Sage Summit Capital",
-    description: "The holding and operating platform behind Vantage Rock Financial.",
+    description:
+      "The holding and operating platform behind Vantage Rock Financial and Moonbag.ai.",
   },
 };
 

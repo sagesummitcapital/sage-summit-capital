@@ -1,8 +1,8 @@
 # Sage Summit Capital — Marketing Site
 
-Marketing site for **Sage Summit Capital**, the holding and operating platform behind **Vantage Rock Financial** — currently the only operating company referenced on the site.
+Marketing site for **Sage Summit Capital**, the holding and operating platform behind two operating companies: **Vantage Rock Financial** (AI-enabled finance / fractional CFO) and **Moonbag.ai** (AI market intelligence and execution layer).
 
-There is one offer on the site: **Book a 30-minute call.** Every CTA (nav, hero, Vantage Rock section, footer) points to the booking form at `#book`, which posts to a Resend-backed API route — the same setup as vantagerockfinancial.com.
+There is one offer on the site: **Book a 30-minute call.** Every Sage Summit CTA (nav, hero, Vantage Rock card, footer) points to the booking form at `#book`, which posts to a Resend-backed API route — the same setup as vantagerockfinancial.com. The Moonbag card is the one exception: it links out to moonbag.ai for early access, since that product runs its own waitlist.
 
 ---
 
@@ -64,18 +64,19 @@ app/
 components/
   Nav.tsx           # Sticky nav with scroll state + mobile menu
   Wordmark.tsx      # Mountain icon + Playfair lockup (inverted variant for dark surfaces)
-  Hero.tsx          # Headline + "platform view" card (Sage Summit → Vantage Rock) with 3D tilt + marquee
-  Sections.tsx      # Shift / WhatWeDo / Ecosystem (Vantage Rock) / OperatingModel / TargetCompanies / Vision / CTA (book)
+  Hero.tsx          # Headline + "platform view" card (Sage Summit → Vantage Rock + Moonbag) with 3D tilt + marquee
+  Sections.tsx      # Shift / WhatWeDo / Ecosystem (both companies) / OperatingModel / TargetCompanies / Vision / CTA (book)
   Reveal.tsx        # Scroll-triggered fade-in (respects prefers-reduced-motion)
   BookingForm.tsx   # The booking form — posts to /api/lead
   Footer.tsx        # Dark institutional footer
 
 app/api/lead/route.ts   # Validation, honeypot, per-IP rate limit, Resend dispatch
 lib/email.ts            # Resend templates: lead notification + submitter confirmation
-lib/site.ts             # Site constants: CTA label/anchor, contact email, Vantage Rock details
+lib/site.ts             # Site constants: CTA label/anchor, contact email, VANTAGE_ROCK + MOONBAG details
 
 public/assets/
-  sage-summit-logo.png, vantage-rock-logo.png, vr-icon.png, …
+  sage-summit-logo.png, vantage-rock-logo.png, vr-icon.png,
+  moonbag-logo.png (horizontal lockup), moonbag-icon.png, …
 ```
 
 ---
@@ -87,7 +88,7 @@ public/assets/
 | 1  | Hero                   | `#top`       |
 | 2  | The Shift              | `#shift`     |
 | 3  | What We Do (3 pillars) | `#approach`  |
-| 4  | Vantage Rock           | `#vantage-rock` |
+| 4  | Operating companies    | `#companies` (cards: `#vantage-rock`, `#moonbag`) |
 | 5  | Operating Model        | `#model`     |
 | 6  | Target Companies       | `#partners`  |
 | 7  | Long-term Vision       | `#vision`    |

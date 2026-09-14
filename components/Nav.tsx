@@ -30,7 +30,7 @@ export function Nav() {
         >
           <a href="#shift" onClick={closeMenu}>The shift</a>
           <a href="#approach" onClick={closeMenu}>What we do</a>
-          <a href="#vantage-rock" onClick={closeMenu}>Vantage Rock</a>
+          <a href="#companies" onClick={closeMenu}>Companies</a>
           <a href="#model" onClick={closeMenu}>Operating model</a>
           <a href="#partners" onClick={closeMenu}>Partners</a>
           <a href="#vision" onClick={closeMenu}>Vision</a>

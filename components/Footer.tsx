@@ -7,6 +7,7 @@ import {
   CTA_ANCHOR,
   CTA_LABEL,
   FOUNDER_LINKEDIN,
+  MOONBAG,
   VANTAGE_ROCK,
 } from "@/lib/site";
 
@@ -20,8 +21,8 @@ export function Footer() {
         <div className="footer__brand">
           <Wordmark inverted />
           <p className="footer__statement">
-            The holding and operating platform behind Vantage Rock Financial —
-            building AI-native finance for the middle market.
+            The holding and operating platform behind Vantage Rock Financial and
+            Moonbag.ai — building AI-native finance and market intelligence.
           </p>
           <div className="footer__ecosystem-tag">
             A platform, not a portfolio
@@ -40,12 +41,22 @@ export function Footer() {
             </ul>
           </div>
           <div className="footer__col">
-            <h4>Operating company</h4>
+            <h4>Operating companies</h4>
             <ul>
-              <li><a href="#vantage-rock">About Vantage Rock</a></li>
+              <li><a href="#companies">Both companies</a></li>
               <li>
                 <a href={VANTAGE_ROCK.url} target="_blank" rel="noopener noreferrer">
                   {VANTAGE_ROCK.name} ↗
+                </a>
+              </li>
+              <li>
+                <a href={MOONBAG.url} target="_blank" rel="noopener noreferrer">
+                  {MOONBAG.name} ↗
+                </a>
+              </li>
+              <li>
+                <a href={MOONBAG.social} target="_blank" rel="noopener noreferrer">
+                  {MOONBAG.socialHandle} ↗
                 </a>
               </li>
             </ul>

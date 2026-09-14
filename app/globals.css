@@ -2087,3 +2087,67 @@ body {
   .footer__cols { grid-template-columns: 1fr; }
   .footer__bottom-inner { flex-direction: column; align-items: flex-start; }
 }
+
+/* ===================================================================
+   TWO OPERATING COMPANIES — platform view branch + Moonbag accents
+   =================================================================== */
+
+/* Hero platform view: parent branches into two companies */
+.pv__branch { position: relative; height: 14px; }
+.pv__branch::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 25%; right: 25%; height: 1px;
+  background: var(--line-3);
+}
+.pv__companies {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.pv__companies .pv__company { position: relative; padding: 14px 14px 13px; }
+.pv__companies .pv__company::before {
+  content: "";
+  position: absolute;
+  top: -14px; left: 50%; transform: translateX(-50%);
+  width: 1px; height: 14px;
+  background: var(--line-3);
+}
+.pv__companies .pv__company-name { font-size: 15px; }
+.pv__companies .pv__company-tag { margin: 11px 0 9px; font-size: 12.5px; }
+.pv__companies .pv__chip { font-size: 9px; padding: 3px 7px; letter-spacing: 0.08em; }
+
+/* Moonbag sits on the sage side of the palette so the two read as peers */
+.pv__company--alt {
+  border-color: var(--line-sage);
+  background:
+    radial-gradient(ellipse 80% 60% at 100% 0%, rgba(122, 143, 124, 0.10), transparent 60%),
+    #FFFFFF;
+  box-shadow: 0 0 0 4px rgba(122, 143, 124, 0.05);
+}
+.pv__company--alt:hover {
+  box-shadow:
+    0 0 0 4px rgba(122, 143, 124, 0.09),
+    0 12px 28px -14px rgba(122, 143, 124, 0.35);
+}
+.pv__company--alt .pv__company-sub { color: var(--c-sage); }
+
+/* Moonbag feature card */
+.eco__child-tag-dot--alt { background: var(--c-alpine); }
+.eco__child--alt { border-color: var(--line-sage); }
+.eco__child--alt::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 100% 0%, rgba(122, 143, 124, 0.08), transparent 62%);
+  pointer-events: none;
+}
+.eco__child--alt > * { position: relative; }
+
+@media (max-width: 520px) {
+  .pv__companies { grid-template-columns: 1fr; }
+  .pv__branch::before { left: 50%; right: 50%; }
+  .pv__companies .pv__company::before { display: none; }
+  .eco__map-row { grid-template-columns: 1fr; }
+  .eco__map-branches::before { left: 50%; right: 50%; }
+}

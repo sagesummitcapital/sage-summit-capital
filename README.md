@@ -2,7 +2,9 @@
 
 Marketing site for **Sage Summit Capital**, the holding and operating platform behind two operating companies: **Vantage Rock Financial** (AI-enabled finance / fractional CFO) and **Moonbag.ai** (AI market intelligence and execution layer).
 
-There is one offer on the site: **Book a 30-minute call.** Every Sage Summit CTA (nav, hero, Vantage Rock card, footer) points to the booking form at `#book`, which posts to a Resend-backed API route — the same setup as vantagerockfinancial.com. The Moonbag card is the one exception: it links out to moonbag.ai for early access, since that product runs its own waitlist.
+There is one Sage Summit offer: **Book a 30-minute call.** The nav, hero, and footer CTAs point to the booking form at `#book`, which posts to a Resend-backed API route — the same setup as vantagerockfinancial.com.
+
+The two company cards route to their own funnels instead: Vantage Rock's button goes to `vantagerockfinancial.com/#book`, and Moonbag's goes to moonbag.ai for early access, since that product runs its own waitlist.
 
 ---
 

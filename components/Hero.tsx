@@ -73,7 +73,7 @@ export function Hero() {
             >
               {MOONBAG.name}
             </a>
-            , our AI market intelligence and execution platform.
+            , our agentic AI market intelligence and execution platform.
           </p>
 
           <div className="hero__cta">
@@ -200,7 +200,7 @@ export function Hero() {
                     </div>
                   </div>
                   <p className="pv__company-tag">
-                    AI market intelligence and an execution layer for traders.
+                    Agentic market intelligence and execution for traders.
                   </p>
                   <div className="pv__chips">
                     {MOONBAG.pillars.map((p) => (

@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import { Reveal } from "./Reveal";
 import { BookingForm } from "./BookingForm";
-import { CTA_ANCHOR, CTA_LABEL, CONTACT_EMAIL, MOONBAG, VANTAGE_ROCK } from "@/lib/site";
+import { CTA_LABEL, CONTACT_EMAIL, MOONBAG, VANTAGE_ROCK } from "@/lib/site";
 
 const ArrowGlyph = () => (
   <svg viewBox="0 0 16 16" aria-hidden="true">
@@ -148,7 +148,7 @@ const PILLARS: Array<{ num: string; title: string; desc: string; icon: ReactNode
   {
     num: "02",
     title: "Build",
-    desc: "We build operating companies from the ground up. Vantage Rock Financial — a fractional CFO and AI-enabled finance firm — came first. Moonbag.ai, an AI market intelligence and execution layer, is the second.",
+    desc: "We build operating companies from the ground up. Vantage Rock Financial — a fractional CFO and AI-enabled finance firm — came first. Moonbag.ai, an agentic AI market intelligence and execution layer for traders, is the second.",
     icon: (
       <svg viewBox="0 0 32 32" fill="none">
         <rect x="6" y="6" width="9" height="9" stroke="currentColor" strokeWidth="1.4" />
@@ -336,18 +336,14 @@ export function Ecosystem() {
                   professional services, technology and SaaS, and multi-entity groups.
                 </p>
                 <div className="eco__child-actions">
-                  <a className="btn btn--primary" href={CTA_ANCHOR}>
+                  <a
+                    className="btn btn--primary"
+                    href={VANTAGE_ROCK.bookUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <span>{CTA_LABEL}</span>
-                    <svg viewBox="0 0 16 16" aria-hidden="true">
-                      <path
-                        d="M3 8h10M9 4l4 4-4 4"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
+                    <ArrowGlyph />
                   </a>
                   <a
                     className="eco__child-link"
@@ -404,10 +400,10 @@ export function Ecosystem() {
                   />
                 </div>
                 <p className="eco__child-desc">
-                  {MOONBAG.tagline} Moonbag scans crypto, equities, gold, and ETFs
-                  continuously, rates what it finds, and hands the trader a
-                  structured plan instead of another chart. The system does the
-                  scanning; the human still makes the call.
+                  {MOONBAG.tagline} Agents scan crypto, equities, gold, and ETFs
+                  continuously, rate what they find, and hand the trader a structured
+                  plan instead of another chart. The system does the scanning; the
+                  human still makes the call.
                 </p>
                 <div className="eco__child-actions">
                   <a
@@ -622,7 +618,7 @@ export function OperatingModel() {
 const TARGETS: Array<{ title: string; desc: string; icon: ReactNode }> = [
   {
     title: "Healthcare",
-    desc: "Service-led healthcare operators with operational complexity and labor density.",
+    desc: "Service-led healthcare operators with multi-site complexity and labor density.",
     icon: (
       <svg viewBox="0 0 32 32" fill="none">
         <path d="M16 5 L19 5 L19 13 L27 13 L27 19 L19 19 L19 27 L13 27 L13 19 L5 19 L5 13 L13 13 Z" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
@@ -630,48 +626,45 @@ const TARGETS: Array<{ title: string; desc: string; icon: ReactNode }> = [
     ),
   },
   {
-    title: "Financial operations",
-    desc: "Finance, back-office, and accounting-led businesses ready for modernization.",
+    title: "Retail & e-commerce",
+    desc: "Multi-channel sellers where margin lives in inventory, pricing, and fulfillment.",
     icon: (
       <svg viewBox="0 0 32 32" fill="none">
-        <rect x="5" y="8" width="22" height="18" rx="2" stroke="currentColor" strokeWidth="1.4" />
-        <path d="M5 13h22M9 18h4M9 22h7" stroke="currentColor" strokeWidth="1.4" />
+        <path d="M5 10 L27 10 L25 26 L7 26 Z" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
+        <path d="M11 13 L11 8 C 11 6, 13 5, 16 5 C 19 5, 21 6, 21 8 L 21 13" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
       </svg>
     ),
   },
   {
-    title: "Business services",
-    desc: "Professional services and outsourced operations with repeatable workflows.",
+    title: "SaaS & technology",
+    desc: "Recurring-revenue businesses that need clean cohort, retention, and cash reporting.",
+    icon: (
+      <svg viewBox="0 0 32 32" fill="none">
+        <path d="M16 4 L28 10.5 L16 17 L4 10.5 Z" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
+        <path d="M4 16 L16 22.5 L28 16" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
+        <path d="M4 21.5 L16 28 L28 21.5" stroke="currentColor" strokeWidth="1.4" strokeLinejoin="round" />
+      </svg>
+    ),
+  },
+  {
+    title: "AI-as-a-service",
+    desc: "AI-native products and platforms scaling usage, compute cost, and gross margin at once.",
+    icon: (
+      <svg viewBox="0 0 32 32" fill="none">
+        <rect x="9" y="9" width="14" height="14" rx="2.5" stroke="currentColor" strokeWidth="1.4" />
+        <circle cx="16" cy="16" r="3" stroke="currentColor" strokeWidth="1.4" />
+        <path d="M13 9 L13 4 M19 9 L19 4 M13 23 L13 28 M19 23 L19 28 M9 13 L4 13 M9 19 L4 19 M23 13 L28 13 M23 19 L28 19" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+      </svg>
+    ),
+  },
+  {
+    title: "Professional & financial services",
+    desc: "Advisory, back-office, and accounting-led firms with repeatable, modernizable workflows.",
     icon: (
       <svg viewBox="0 0 32 32" fill="none">
         <rect x="5" y="10" width="22" height="14" rx="2" stroke="currentColor" strokeWidth="1.4" />
         <path d="M11 10 L11 7 C 11 6, 12 5, 13 5 L 19 5 C 20 5, 21 6, 21 7 L 21 10" stroke="currentColor" strokeWidth="1.4" />
         <path d="M5 16h22" stroke="currentColor" strokeWidth="1.4" />
-      </svg>
-    ),
-  },
-  {
-    title: "Operationally complex",
-    desc: "Multi-site, multi-system businesses requiring infrastructure consolidation.",
-    icon: (
-      <svg viewBox="0 0 32 32" fill="none">
-        <circle cx="16" cy="16" r="3" stroke="currentColor" strokeWidth="1.4" />
-        <circle cx="6" cy="8" r="2" stroke="currentColor" strokeWidth="1.4" />
-        <circle cx="26" cy="8" r="2" stroke="currentColor" strokeWidth="1.4" />
-        <circle cx="6" cy="24" r="2" stroke="currentColor" strokeWidth="1.4" />
-        <circle cx="26" cy="24" r="2" stroke="currentColor" strokeWidth="1.4" />
-        <path d="M8 9 L14 14 M24 9 L18 14 M8 23 L14 18 M24 23 L18 18" stroke="currentColor" strokeWidth="1.4" />
-      </svg>
-    ),
-  },
-  {
-    title: "Labor-heavy services",
-    desc: "Service businesses where AI-native systems unlock operational leverage.",
-    icon: (
-      <svg viewBox="0 0 32 32" fill="none">
-        <circle cx="11" cy="11" r="4" stroke="currentColor" strokeWidth="1.4" />
-        <circle cx="22" cy="13" r="3" stroke="currentColor" strokeWidth="1.4" />
-        <path d="M3 26c1-4 4-6 8-6s7 2 8 6M18 26c1-3 3-4 6-4s5 1 6 4" stroke="currentColor" strokeWidth="1.4" />
       </svg>
     ),
   },
@@ -687,14 +680,16 @@ export function TargetCompanies() {
             <span>05 — Who we partner with</span>
           </div>
           <h2 className="section__title">
-            We partner with companies ready for{" "}
+            We work across industries, with companies ready for{" "}
             <span className="gradient-accent gradient-accent-line">modernization</span>.
           </h2>
           <p className="section__lede">
-            Founder-led middle-market operators, portfolio companies of private
-            equity sponsors, and family offices looking for a long-term partner in
-            operational transformation — whether that starts with a Vantage Rock
-            engagement or a bigger conversation.
+            Healthcare, retail and e-commerce, SaaS and technology, AI-as-a-service,
+            and professional services — founder-led middle-market operators,
+            portfolio companies of private equity sponsors, and family offices
+            looking for a long-term partner in operational transformation. The
+            sector varies; the pattern doesn&apos;t — multi-system, labor-heavy
+            businesses where better decisions compound.
           </p>
         </Reveal>
 

@@ -21,6 +21,7 @@ export const VANTAGE_ROCK = {
   name: "Vantage Rock Financial",
   shortName: "Vantage Rock",
   url: "https://www.vantagerockfinancial.com",
+  bookUrl: "https://www.vantagerockfinancial.com/#book",
   display: "vantagerockfinancial.com",
   tagline: "AI-enabled finance. Fractional CFO. Without the full-time hire.",
   pillars: ["Fractional CFO", "FP&A", "AI Implementation"],
@@ -35,7 +36,7 @@ export const MOONBAG = {
   social: "https://x.com/moonbagai",
   socialHandle: "@moonbagai",
   tagline:
-    "AI market intelligence and an execution layer. Ranked opportunities, structured setups, faster decisions.",
+    "An agentic AI market intelligence and execution layer for traders who want speed, clarity, and an edge.",
   pillars: ["Market scanner", "Opportunity ratings", "Execution plans"],
 };
 
